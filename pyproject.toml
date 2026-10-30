@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentic-ops-lab"
+version = "0.1.0"
+description = "OpenTelemetry foundation for bounded agent operations experiments"
+requires-python = ">=3.11"
+dependencies = [
+  "opentelemetry-sdk==1.38.0",
+  "opentelemetry-exporter-otlp-proto-http==1.38.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+
+[project.scripts]
+agentic-ops-demo = "agentic_ops_lab.demo:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

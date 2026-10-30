@@ -2,7 +2,7 @@
 
 A four-role experimental lab for evaluating the reliability and security of agent-assisted Kubernetes operations.
 
-> **Status: concept and roadmap.** This repository currently documents the planned system. The agents, replay harness and experiments described below are not implemented here yet.
+> **Status: observability foundation and roadmap.** A runnable OpenTelemetry demo and local tracing stack are available. Live agents, replay harness and cluster experiments are not implemented here yet.
 
 **The model proposes; deterministic policy authorizes; execution is verified.**
 
@@ -15,6 +15,22 @@ A four-role experimental lab for evaluating the reliability and security of agen
 | **azure-kubernetes-agentic-ops-lab** | Automated experiments, adversarial scenarios and decision replay |
 
 This lab builds on the diagnostic and deterministic remediation design explored in the previous projects. Existing code and scenarios will be reviewed and adapted incrementally; this repository does not claim that earlier results validate the new system.
+
+## Run the tracing demo
+
+Start with the [OpenTelemetry setup guide](docs/observability.md) for installation,
+Windows Git Bash instructions and the local Collector → Tempo → Grafana stack.
+
+```bash
+python -m pip install -e '.[dev]'
+python -m pytest -q
+python -m agentic_ops_lab.demo --console
+```
+
+The synthetic demo traces diagnostic collection, a stub model call, W3C context
+handoff, policy evaluation, stub remediation and verification. It includes success,
+policy denial, model timeout and tool failure scenarios. It makes no model requests
+or Kubernetes changes. Telemetry does not replace the recording/replay milestone.
 
 ## Purpose
 
@@ -168,4 +184,4 @@ A later CI layer will check that new mutating tools have an explicit policy and 
 
 ## Current availability
 
-This is a design-stage repository. There are no installation or deployment instructions yet, and no measured results are claimed. Runnable commands and evidence will be added as milestones are implemented.
+The Python tracing module, synthetic two-service flow, local observability stack configuration and automated tests are available. See [the setup guide](docs/observability.md) for capabilities and verification limits. Live four-role operation, recording/replay and AKS integration remain planned; no live remediation results are claimed.
