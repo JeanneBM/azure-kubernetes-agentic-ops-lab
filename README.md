@@ -8,11 +8,14 @@ A four-role experimental lab for evaluating the reliability and security of agen
 
 ## Project series
 
-| Repository | Focus |
-| --- | --- |
-| [azure-kubernetes-agentic-ops-poc](https://github.com/JeanneBM/azure-kubernetes-agentic-ops-poc) | Initial operational prototype |
-| [azure-kubernetes-agentic-ops-eval](https://github.com/JeanneBM/azure-kubernetes-agentic-ops-eval) | Controlled scenarios and evaluation evidence |
-| **azure-kubernetes-agentic-ops-lab** | Automated experiments, adversarial scenarios and decision replay |
+**Start here:** final results are in [Eval](https://github.com/JeanneBM/azure-kubernetes-agentic-ops-eval); new work happens in [Lab](https://github.com/JeanneBM/azure-kubernetes-agentic-ops-lab).
+
+| Stage | Repository | Role | Status |
+| --- | --- | --- | --- |
+| 1 | [azure-kubernetes-agentic-ops](https://github.com/JeanneBM/azure-kubernetes-agentic-ops) | First implementation slice: infrastructure-agnostic incident orchestrator core | Historical, not developed further |
+| 2 | [azure-kubernetes-agentic-ops-poc](https://github.com/JeanneBM/azure-kubernetes-agentic-ops-poc) | Two-agent AKS prototype with demo recording | Superseded by Eval |
+| 3 | [azure-kubernetes-agentic-ops-eval](https://github.com/JeanneBM/azure-kubernetes-agentic-ops-eval) | Live evaluation against a deterministic baseline; **final results** | Closed on 29 October 2026 (v0.2.0) |
+| 4 | **azure-kubernetes-agentic-ops-lab** (this repository) | Automated experiments, adversarial scenarios and decision replay | Active development |
 
 This lab builds on the diagnostic and deterministic remediation design explored in the previous projects. Existing code and scenarios will be reviewed and adapted incrementally; this repository does not claim that earlier results validate the new system.
 
