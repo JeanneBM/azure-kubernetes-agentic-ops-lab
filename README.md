@@ -2,7 +2,7 @@
 
 A four-role experimental lab for evaluating the reliability and security of agent-assisted Kubernetes operations.
 
-> **Status: observability foundation and roadmap.** A runnable OpenTelemetry demo and local tracing stack are available. Live agents, replay harness and cluster experiments are not implemented here yet.
+> **Status:** OpenTelemetry demo and a deterministic local workload experiment. Live agents and incident replay remain on the roadmap.
 
 **The model proposes; deterministic policy authorizes; execution is verified.**
 
@@ -34,6 +34,16 @@ The synthetic demo traces diagnostic collection, a stub model call, W3C context
 handoff, policy evaluation, stub remediation and verification. It includes success,
 policy denial, model timeout and tool failure scenarios. It makes no model requests
 or Kubernetes changes. Telemetry does not replace the recording/replay milestone.
+
+## Run the kind experiment
+
+Requires Docker, kind and kubectl on PATH. Run from Git Bash or Linux:
+
+```bash
+bash scripts/run-kind-lab.sh
+```
+
+The script creates a fresh cluster with an isolated kubeconfig. It checks HTTP readiness, observes the expected Kubernetes startup failure for an unavailable image and a missing ConfigMap, and restores the HTTP-ready baseline after each trial. It deletes the cluster on exit. The [Tests workflow](../../actions/workflows/tests.yml) keeps the run log as an artifact.
 
 ## Purpose
 
@@ -187,4 +197,4 @@ A later CI layer will check that new mutating tools have an explicit policy and 
 
 ## Current availability
 
-The Python tracing module, synthetic two-service flow, local observability stack configuration and automated tests are available. See [the setup guide](docs/observability.md) for capabilities and verification limits. Live four-role operation, recording/replay and AKS integration remain planned; no live remediation results are claimed.
+The Python tracing module, synthetic two-service flow, local observability stack configuration, deterministic kind experiment and automated tests are available. See [the setup guide](docs/observability.md) for capabilities and verification limits. Live four-role operation, recording/replay and AKS integration remain planned; no live remediation results are claimed.
