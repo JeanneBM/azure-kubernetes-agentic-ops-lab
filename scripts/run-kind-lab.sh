@@ -27,12 +27,11 @@ trap 'exit 130' INT
 trap 'exit 143' TERM
 
 kind create cluster --name "$cluster" --kubeconfig "$KUBECONFIG" --wait 120s
-docker pull "$image"
-kind load docker-image --name "$cluster" "$image"
 
 create_pod() {
   local pod_image=$1
   local config=${2:-}
+  local pull_policy=${3:-IfNotPresent}
   {
     cat <<EOF
 apiVersion: v1
@@ -44,7 +43,7 @@ spec:
   containers:
     - name: web
       image: $pod_image
-      imagePullPolicy: Never
+      imagePullPolicy: $pull_policy
       readinessProbe:
         httpGet:
           path: /
@@ -87,7 +86,7 @@ wait_for_reason() {
 
 baseline
 remove_pod
-create_pod nginx:lab-missing-image
+create_pod nginx:lab-missing-image "" Never
 wait_for_reason ErrImageNeverPull
 remove_pod
 baseline
