@@ -2,7 +2,7 @@
 
 A four-role experimental lab for evaluating the reliability and security of agent-assisted Kubernetes operations.
 
-> **Status:** OpenTelemetry demo and a deterministic local workload experiment. Live agents and incident replay remain on the roadmap.
+> **Status:** OpenTelemetry demo and a deterministic local workload experiment. [L1 validated on 17 November 2026](evidence/2026-11-17-L1.md). Live agents and incident replay remain on the roadmap.
 
 **The model proposes; deterministic policy authorizes; execution is verified.**
 
@@ -43,7 +43,7 @@ Requires Docker, kind and kubectl on PATH. Run from Git Bash or Linux:
 bash scripts/run-kind-lab.sh
 ```
 
-The script creates a fresh cluster with an isolated kubeconfig. It checks HTTP readiness, observes the expected Kubernetes startup failure for an unavailable image and a missing ConfigMap, and restores the HTTP-ready baseline after each trial. It deletes the cluster on exit. The [Tests workflow](../../actions/workflows/tests.yml) keeps the run log as an artifact.
+The script creates a fresh cluster with an isolated kubeconfig. It checks HTTP readiness, observes the expected Kubernetes startup failure for an unavailable image and a missing ConfigMap, and restores the HTTP-ready baseline after each trial. It deletes the cluster on exit. The [Tests workflow](https://github.com/JeanneBM/azure-kubernetes-agentic-ops-lab/actions/workflows/tests.yml) keeps the run log as an artifact.
 
 ## Purpose
 
@@ -170,7 +170,7 @@ Compare adaptive scenario generation against a random baseline under comparable 
 ## Development roadmap
 
 - [ ] **1. Record and replay S01.** Capture a complete incident, replay gate decisions and compare diagnoses without cluster access.
-- [ ] **2. Build the basic experiment loop.** Run three fault types on kind with baseline checks, deterministic judging, reset and a session report.
+- [ ] **2. Extend the basic experiment loop.** Image and ConfigMap trials pass on kind with baseline checks, deterministic assertions and reset. Health-probe trials and agent decision recording remain planned.
 - [ ] **3. Add adaptive scenario selection.** Let the Saboteur select approved experiments within fixed time, round and token limits.
 - [ ] **4. Add prompt-injection trials.** Measure forbidden proposals separately from executions and preserve attack/control pairs.
 - [ ] **5. Add the Investigator.** Establish ablation baselines before evaluating LLM-guided interventions.
