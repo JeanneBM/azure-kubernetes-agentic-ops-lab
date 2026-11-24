@@ -6,6 +6,32 @@ A four-role experimental lab for evaluating the reliability and security of agen
 
 **The model proposes; deterministic policy authorizes; execution is verified.**
 
+## Architecture
+
+Implemented paths: a synthetic tracing demo and a deterministic kind workload experiment. The four-role agent loop remains the planned architecture below; neither implemented path calls a live model.
+
+```mermaid
+flowchart TD
+  subgraph TRACE["Synthetic tracing demo"]
+    DEMO["Demo scenarios"] --> DIAG["Diagnostic and model stubs"]
+    DIAG --> REM["Policy, remediation and verification stubs"]
+    DIAG --> OTEL["OpenTelemetry spans"]
+    REM --> OTEL
+  end
+  subgraph OBS["Local observability stack"]
+    OTEL --> COL["OTel Collector"]
+    COL --> TEMPO[("Tempo")]
+    TEMPO --> GRAF["Grafana traces"]
+  end
+  subgraph KIND["Separate deterministic kind experiment"]
+    SCRIPT["run-kind-lab.sh"] --> APP["Disposable HTTP workload"]
+    SCRIPT --> FAULT["Bad image or missing ConfigMap"]
+    FAULT --> APP
+    APP --> CHECK["Observe failure, restore and check HTTP readiness"]
+    CHECK --> REPORT["CI run log and cluster cleanup"]
+  end
+```
+
 ## Project series
 
 **Start here:** final results are in [Eval](https://github.com/JeanneBM/azure-kubernetes-agentic-ops-eval); new work happens in [Lab](https://github.com/JeanneBM/azure-kubernetes-agentic-ops-lab).
